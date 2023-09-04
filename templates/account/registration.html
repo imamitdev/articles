@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="card-box">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Registration</h2>
+        <hr />
+
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder=" Enter Full Name"
+              class="form-control input-lg"
+              name="full_name"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder=" Enter Email"
+              class="form-control input-lg"
+              name="email"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder=" Enter Mobile No"
+              class="form-control input-lg"
+              name="mobile_no"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password "
+              class="form-control input-lg"
+              name="password"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Confirm Password "
+              class="form-control input-lg"
+              name="confirm_password"
+            />
+          </div>
+          <button class="btn-lg btn-warning pull-center">Submit</button>
+        </form>
+
+        <div class="margin-8 clear"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

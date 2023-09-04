@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-lg-6">
+      <a href="{% url 'create' %}">
+        <button class="btn-lg btn-secondary longButton">
+          Create Category
+        </button></a
+      >
+    </div> -->
+    <div class="col-lg-12">
+      <a href="{% url 'create' %}">
+        <button class="btn-lg btn-secondary longButton">
+          Create Article
+        </button></a
+      >
+    </div>
+    <div class="col-lg-12 bar">
+      <div class="container">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <p class="text-center">Your Articles</p>
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Serial No</th>
+                <th>Title</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for item in articles %}
+              <tr>
+                <td class="col-lg-1 col-md-1 col-xs-2">{{forloop.counter}}</td>
+                <td class="vert-align">
+                  <a href="{% url 'article_detail' item.id %}"
+                    >{{item.title}}</a
+                  >
+                </td>
+                <td class="text-center vert-align">
+                  <a
+                    class="btn-lg btn-secondary"
+                    href="{% url 'edit_article' item.id %}"
+                    >Edit</a
+                  >
+                  <!-- <button class="btn-lg btn-secondary">edit</button> -->
+                </td>
+
+                <td class="text-center vert-align">
+                  <a
+                    class="btn-lg btn-secondary"
+                    href="{% url 'delete_article' item.id %}"
+                    >Delete</a
+                  >
+                  <!-- <button class="btn-lg btn-secondary">delete</button> -->
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span class="step-links">
+            {% if articles.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ articles.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current-page">{{ articles.number }}</span>
+
+            {% if articles.has_next %}
+            <a href="?page={{ articles.next_page_number }}">next</a>
+            <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

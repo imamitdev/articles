@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <form action="{% url 'article_search' %}" method="GET">
+    <div class="searchBar">
+      <div class="col-lg-3 searchBarItem">
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="search"
+          name="query"
+        />
+      </div>
+
+      <div class="col-lg-3">
+        <button type="submit" class="btn btn-primary longButton">Search</button>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-lg-8">
+      <h2>
+        Results for "{% for category in selected_categories %}{{ category }}
+        {%if not forloop.last %}, {% endif %}{% endfor %}"
+      </h2>
+      {% for item in articles %}
+      <div class="jumbotron-fluid aboutPost">
+        <div class="jumbotron">
+          <!-- <h6>BLOG</h6> -->
+          <h3>{{item.title}}</h3>
+          {% for category in item.category.all %}
+          <!-- <li>{{ category.category }}</li> -->
+          <h4>{{category.category}},</h4>
+          {% endfor %}
+          <p>{{item.content}}</p>
+          <a
+            class="btn btn-primary btn-lg"
+            href="{% url 'article_detail' item.id %}"
+            role="button"
+            >Learn more</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="card col-lg-4 col-md-4">
+      <h3>Categories</h3>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-mb-6 jumbotron">
+            <ul class="list-unstyled mb-0">
+              {% for cat in category %}
+              <li>
+                <a href="{% url 'articles_by_categories' cat.category %}"
+                  >{{cat.category}}</a
+                >
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+      <span class="step-links">
+        {% if articles.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ articles.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page">{{ articles.number }}</span>
+
+        {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}">next</a>
+        <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
