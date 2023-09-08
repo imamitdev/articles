@@ -108,6 +108,7 @@ def article_search(request):
             search_result = Article.objects.order_by("-created_at").filter(
                 Q(content__icontains=query) | Q(title__icontains=query)
             )
+
             paginator = Paginator(
                 search_result, 2
             )  # You can adjust the number of articles per page as needed

@@ -1,64 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <!-- Images + Photo -->
-
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row backgroundImage">
-              <div class="col-lg-6">
-                <div class="contentBlock">
-                  <h6></h6>
-                  <h1>Bringing the benefits of AI to everyone</h1>
-                  <p>We provide a platform for thousands of people to exchange ideas and to expand our understanding of data science. While we allow authors to publish articles, we do not endorse each author’s contribution.</p>
+   <header class="py-5 bg-light border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder">Welcome to Articlres </h1>
+                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
                 </div>
-              </div>
-
-              <div class="col-lg-6"></div>
             </div>
-          </div>
-          <hr />
-          {% for item in articles %}
-            <div class="col-sm-6 col-md-4">
-              <div class="thumbnail">
-                <img src="{{ item.image.url }}" alt="Title" />
-
-                <div class="caption">
-                  <h3>{{ item.title }}</h3>
-                  <p>by {{ item.author }}</p>
-                  <p>
-                    <a href="#" class="btn btn-primary" role="button">Like</a>
-                    <a href="#" class="btn btn-primary" role="button">Comment</a>
-                    <a href="{% url 'article_detail' item.id %}" class="btn btn-primary" role="button">Read more</a>
-                  </p>
+        </header>
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    {% for item in articles %}
+                    <div class="card mb-4">
+                        <a href="{% url 'article_detail' item.id %}">
+                          <img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
+                        <div class="card-body">
+                            <div class="small text-muted">{{item.created_at}}</div>
+                            <h2 class="card-title">{{ item.title }}</h2>
+                            <p class="card-text">by {{item.author}}</p>
+                            <a class="btn btn-primary" href="{% url 'article_detail' item.id %}">Read more →</a>
+                        </div>
+                    </div> 
+                    {% endfor %}
+                    <!-- Nested row for non-featured blog posts-->
+                
+                    <!-- Pagination-->
+                    <nav aria-label="Pagination">
+                        <hr class="my-0" />
+                        
+                        {% if articles.has_other_pages %}
+                          
+                     
+                          
+                        <ul class="pagination justify-content-center my-4">
+                          {% if articles.has_previous %}
+                            <li class="page-item "><a class="page-link" href="?page={{ articles.previous_page_number }}" >Previous</a></li>
+                            {% else %}
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="/">Previous</a></li>
+                            {% endif %}
+                            {% for i in articles.paginator.page_range %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endfor %}
+                            {% if articles.has_next %}
+                            
+                            <li class="page-item"><a class="page-link" href="?page={{ articles.next_page_number }}">Next</a></li>
+                             {% else %}
+                            <li class="page-item active"><a class="page-link" href="#">Next</a></li>
+                              {% endif %}
+                        </ul>
+                           {% endif %}
+                    </nav>
                 </div>
-              </div>
+
+
+
+
+
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <form action="{% url 'article_search' %}" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="query" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                            </div>
+                                </form>
+
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">Categories</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="list-unstyled mb-0">
+                                         {% for cat in category %}
+                                        <li><a href="{% url 'articles_by_categories' cat.category %}">{{cat.category}}</a></li>
+                                        
+                                          {% endfor %}
+                                    </ul>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">Side Widget</div>
+                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                    </div> 
+                </div>
             </div>
-          {% endfor %}
         </div>
-      </div>
-
-<div class="pagination">
-    <span class="step-links">
-        {% if articles.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ articles.previous_page_number }}">previous</a>
-        {% endif %}
-        
-        <span class="current-page">{{ articles.number }}</span>
-        
-        {% if articles.has_next %}
-            <a href="?page={{ articles.next_page_number }}">next</a>
-            <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
 
 
-      
-    </div>
-  </div>
 {% endblock %}
+
+
+
+
+  
