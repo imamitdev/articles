@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block title %}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
   Article
 {% endblock %} {% block content %}
   <div class="container">
@@ -47,7 +49,14 @@
                    {% for item in article %}
                     <div class="card mb-4">
                         <a href="{% url 'article_detail' item.id %}">
+                          {%if item.image%}
                           <img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
+
+
+                          {% else %}
+                          <img class="card-img-top" src="{% static 'img/indexBackground2.jpg' %}" alt="..." /></a>
+
+                          {%endif%}
                         <div class="card-body">
                             <div class="small text-muted">{{item.created_at}}</div>
                             <h2 class="card-title">{{ item.title }}</h2>

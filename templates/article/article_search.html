@@ -1,5 +1,9 @@
-{% extends 'base.html' %} {% block title %} Article {% endblock %}
- {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} Article {% endblock %} 
+{% block content %}
+
 <div class="container">
   <div class="text-center my-5">
     <h1 class="fw-bolder text-success">Articles</h1>
@@ -37,11 +41,10 @@
               <ul class="list-unstyled mb-0">
                 {% for cat in category %}
                 <li>
-                  <a href="{% url 'articles_by_categories' cat.category %}"
-                    >{{cat.category}}</a
+                  <a href="{% url 'articles_by_categories'  cat.category  %}"
+                    >{{ cat.category }}</a
                   >
                 </li>
-
                 {% endfor %}
               </ul>
             </div>
@@ -58,39 +61,48 @@
       </div>
     </div>
     <div class="col-lg-8">
-       {% if articles %}
-             <h2 class="text-center">Results for "{{ query }}"</h2>
-<hr/>
+      {% if articles %}
+      <h2 class="text-center">Results for "{{ query }}"</h2>
+      <hr />
       {% for item in articles %}
       <div class="card mb-4">
-        <a href="{% url 'article_detail' item.id %}">
-          <img class="card-img-top" src="{{ item.image.url }}" alt="..."
-        /></a>
+        <a href="{% url 'article_detail' item.id  %}"
+
+
+          {%if item.image%}
+        <img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
+
+
+        {% else %}
+        <img class="card-img-top" src="{% static 'img/indexBackground2.jpg' %}" alt="..." />
+
+        {%endif%}
+      
+      
+      
+      
+      </a>
         <div class="card-body">
-          <div class="small text-muted">{{item.created_at}}</div>
+          <div class="small text-muted">{{ item.created_at }}</div>
           <h2 class="card-title">{{ item.title }}</h2>
-          <p class="card-text">by {{item.author}}</p>
-          <a class="btn btn-primary" href="{% url 'article_detail' item.id %}"
+          <p class="card-text">by {{ item.author_name }}</p>
+          <a class="btn btn-primary" href="{% url 'article_detail' item.id  %}"
             >Read more →</a
           >
         </div>
       </div>
-
-        {% endfor %} {% else %}
-<br/><br/>
-<br/>
+      {% endfor %} {% else %}
+      <br /><br />
+      <br />
       <h2 class="text-center">No results found for "{{ query }}"</h2>
-<br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/>
+      <br /><br />
+      <br /><br /><br />
+      <br /><br /><br />
+      <br /><br /><br />
+      <br />
 
-
-
-<br/><br/>
-<br/><br/><br/>
-
+      <br /><br />
+      <br /><br /><br />
       {% endif %}
 
       <nav aria-label="Pagination">
@@ -100,7 +112,9 @@
         <ul class="pagination justify-content-center my-4">
           {% if articles.has_previous %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ articles.previous_page_number }}"
+            <a
+              class="page-link"
+              href="?page={{ articles.previous_page_number }}"
               >Previous</a
             >
           </li>
@@ -117,7 +131,6 @@
             <a class="page-link" href="?page={{ articles.next_page_number }}"
               >Next</a
             >
-            `
           </li>
           {% else %}
           <li class="page-item active">
@@ -133,5 +146,4 @@
     <!-- Categories widget -->
   </div>
 </div>
-
 {% endblock %}

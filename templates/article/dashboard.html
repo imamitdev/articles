@@ -1,26 +1,19 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
+      <div class="text-center my-2">
+      <h1 class="fw-bolder text-success">Articles</h1>
+    </div>
+    <hr/>
   <div class="row">
-    <!-- <div class="col-lg-6">
-      <a href="{% url 'create' %}">
-        <button class="btn-lg btn-secondary longButton">
-          Create Category
-        </button></a
-      >
-    </div> -->
-    <div class="col-lg-12">
-      <a href="{% url 'create' %}">
-        <button class="btn-lg btn-secondary longButton">
+ 
+    <div class="col-lg-12 bar">
+   <a href="{% url 'create' %}">
+        <button class="btn btn-primary mb-2 longButton">
           Create Article
         </button></a
       >
-    </div>
-    <div class="col-lg-12 bar">
-      <div class="container">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <p class="text-center">Your Articles</p>
-          </div>
+      
 
           <table class="table table-striped">
             <thead>
@@ -42,44 +35,73 @@
                   >
                 </td>
                 <td class="text-center vert-align">
-                  <a
+                  <!-- <a
                     class="btn-lg btn-secondary"
                     href="{% url 'edit_article' item.id %}"
                     >Edit</a
-                  >
-                  <!-- <button class="btn-lg btn-secondary">edit</button> -->
+                  > -->
+                    <a href="{% url 'edit_article' item.id %}">
+        <button class="btn btn-primary mb-2 longButton">
+          Edit
+        </button></a
+      >
                 </td>
 
                 <td class="text-center vert-align">
-                  <a
-                    class="btn-lg btn-secondary"
-                    href="{% url 'delete_article' item.id %}"
-                    >Delete</a
-                  >
-                  <!-- <button class="btn-lg btn-secondary">delete</button> -->
+               
+                        
+                    <a href="{% url 'delete_article' item.id %}">
+        <button class="btn btn-primary mb-2 longButton">
+          Delete
+        </button></a
+      >
                 </td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
-        <div class="pagination">
-          <span class="step-links">
+
+        <nav aria-label="Pagination">
+          <hr class="my-0" />
+
+          {% if articles.has_other_pages %}
+
+          <ul class="pagination justify-content-center my-4">
             {% if articles.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ articles.previous_page_number }}">previous</a>
-            {% endif %}
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="?page={{ articles.previous_page_number }}"
+                >Previous</a
+              >
+            </li>
+            {% else %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="/">Previous</a>
+            </li>
+            {% endif %} {% for i in articles.paginator.page_range %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endfor %} {% if articles.has_next %}
 
-            <span class="current-page">{{ articles.number }}</span>
-
-            {% if articles.has_next %}
-            <a href="?page={{ articles.next_page_number }}">next</a>
-            <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ articles.next_page_number }}"
+                >Next</a
+              >
+            </li>
+            {% else %}
+            <li class="page-item active">
+              <a class="page-link" href="#">Next</a>
+            </li>
             {% endif %}
-          </span>
-        </div>
+          </ul>
+          {% endif %}
+        </nav>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock content %}

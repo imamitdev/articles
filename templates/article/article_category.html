@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block title %} Article {% endblock %} 
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block title %} Article {% endblock %} 
 {% block content %}
 <div class="container">
   <div class="text-center my-5">
@@ -59,13 +63,20 @@
     </div>
     <div class="col-lg-8">
       {% if articles %}
-      <h2 class="text-center">Results for "{{ query }}"</h2>
+      <h2 class="text-center">Results for "{{ selected_categories }}"</h2>
       <hr />
       {% for item in articles %}
       <div class="card mb-4">
         <a href="{% url 'article_detail' item.id %}">
-          <img class="card-img-top" src="{{ item.image.url }}" alt="..."
-        /></a>
+          {%if item.image%}
+        <img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
+
+
+        {% else %}
+        <img class="card-img-top" src="{% static 'img/indexBackground2.jpg' %}" alt="..." />
+
+        {%endif%}
+        </a>
         <div class="card-body">
           <div class="small text-muted">{{item.created_at}}</div>
           <h2 class="card-title">{{ item.title }}</h2>
@@ -116,8 +127,7 @@
           <li class="page-item">
             <a class="page-link" href="?page={{ articles.next_page_number }}"
               >Next</a
-            >
-            `
+            >            
           </li>
           {% else %}
           <li class="page-item active">
@@ -128,9 +138,7 @@
         {% endif %}
       </nav>
     </div>
-    <!-- Side widgets -->
 
-    <!-- Categories widget -->
   </div>
 </div>
 

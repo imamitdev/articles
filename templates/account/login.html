@@ -1,34 +1,43 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container" style="text-align: center; align-items: center">
+<div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <h2>Login</h2>
-      <hr />
+      <div class="text-center my-2">
+        <h1 class="text-success">Login</h1>
+      </div>
+      <div class="card mb-4 mx-7">
+        <div class="card-body">
+          <form method="POST">
+             {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                            name="email"
 
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <input
-            type="email"
-            placeholder=" Email "
-            class="form-control input-lg"
-            name="email"
-          />
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                            name="password"
+
+                placeholder="Password"
+              />
+            </div>
+       
+         
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
-        <div class="form-group">
-          <input
-            type="password"
-            placeholder="Password "
-            class="form-control input-lg"
-            name="password"
-          />
-        </div>
-
-        <button class="btn-lg btn-warning pull-center">Submit</button>
-      </form>
-
-      <div class="margin-8 clear"></div>
+      </div>
     </div>
   </div>
-</div>
+
 {% endblock content %}

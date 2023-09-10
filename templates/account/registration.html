@@ -1,59 +1,74 @@
 {% extends 'base.html' %} {% block content %}
+
 <div class="container">
-  <div class="card-box">
-    <div class="row">
-      <div class="col-lg-6">
-        <h2>Registration</h2>
-        <hr />
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="text-center my-2">
+        <h1 class="text-success">Registration</h1>
+      </div>
+      <div class="card mb-4 mx-7 " style="width: 100%;">
+        <div class="card-body">
+          <form method="POST">
+             {% csrf_token %}
+               <div class="form-group">
+              <label for="exampleInputName">Name </label>
+              <input
+                type="text"
+                class="form-control"
+                            name="full_name"
 
-        <form action="" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <input
-              type="text"
-              placeholder=" Enter Full Name"
-              class="form-control input-lg"
-              name="full_name"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="email"
-              placeholder=" Enter Email"
-              class="form-control input-lg"
-              name="email"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              placeholder=" Enter Mobile No"
-              class="form-control input-lg"
-              name="mobile_no"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              placeholder="Password "
-              class="form-control input-lg"
-              name="password"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              placeholder="Confirm Password "
-              class="form-control input-lg"
-              name="confirm_password"
-            />
-          </div>
-          <button class="btn-lg btn-warning pull-center">Submit</button>
-        </form>
+                placeholder="Enter Full Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Mobile No</label>
+              <input
+                type="text"
+                class="form-control"
+                            name="mobile_no"
 
-        <div class="margin-8 clear"></div>
+                placeholder="Enter Mobile No"
+              />
+            </div>
+                        <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                            name="email"
+
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                            name="password"
+
+                placeholder="Password"
+              />
+            </div>
+                  <div class="form-group">
+              <label for="exampleInputPassword1">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                            name="confirm_password"
+
+                placeholder=" Confirm Password"
+              />
+            </div>
+         
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+
 {% endblock content %}

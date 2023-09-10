@@ -124,7 +124,7 @@ def article_search(request):
 
 
 def articles_by_categories(request, category_names):
-    categories = category_names.split(",")
+    categories = category_names.split()
     articles = Article.objects.filter(category__category__in=categories)
     paginator = Paginator(
         articles, 2
@@ -134,8 +134,9 @@ def articles_by_categories(request, category_names):
     category = Category.objects.all()
     context = {
         "articles": page,
-        "selected_categories": categories,
+        "selected_categories": categories[0],
         "category": category,
+        
     }
 
     return render(request, "article/article_category.html", context)
