@@ -26,3 +26,5 @@ class ArticleForm(forms.ModelForm):
         # self.fields["image"].widget.attrs["placeholder"] = "Enter image"
         for field in self.fields:
             self.fields[field].widget.attrs["class"] = "form-control"
+
+

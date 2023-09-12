@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm
 from django.contrib import messages, auth
-from .models import Article, Category
+from .models import Article, Category,Like
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -85,8 +85,15 @@ def edit_article(request, article_id):
 
 def article_detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
+    user_liked=Like.objects.filter(
+        article_id=article_id,user=request.user
+    ).exists()
+    liked_count=0
+    liked_count=Like.objects.filter(article_id=article_id).count()
     context = {
         "article": article,
+        "user_liked":user_liked,
+        "liked_count":liked_count,
     }
     return render(request, "article/article_detail.html", context)
 
@@ -140,3 +147,13 @@ def articles_by_categories(request, category_names):
     }
 
     return render(request, "article/article_category.html", context)
+
+def like(request,article_id):
+    article=get_object_or_404(Article,pk=article_id)
+    Like.objects.create(article_id=article.id,user=request.user)
+    return redirect('article_detail',article_id=article.id)
+
+def unlike(request,article_id):
+    article=get_object_or_404(Article,pk=article_id)
+    Like.objects.filter(article_id=article.id,user=request.user).delete()
+    return redirect('article_detail',article_id=article.id)

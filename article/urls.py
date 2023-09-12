@@ -30,4 +30,14 @@ urlpatterns = [
         views.articles_by_categories,
         name="articles_by_categories",
     ),
+    path(
+        "like/<int:article_id>/",
+        views.like,
+        name='like',
+    ),
+     path(
+        "unlike/<int:article_id>/",
+        views.unlike,
+        name='unlike',
+    )
 ]

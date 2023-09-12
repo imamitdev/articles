@@ -25,3 +25,11 @@ class Article(models.Model):
         return self.title
 
    
+class Like(models.Model):
+    article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    create_date=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        result = self.article.title + " liked by " + self.user.username
+        return result
