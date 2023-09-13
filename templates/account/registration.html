@@ -6,63 +6,11 @@
       <div class="text-center my-2">
         <h1 class="text-success">Registration</h1>
       </div>
-      <div class="card mb-4 mx-7 " style="width: 100%;">
+      <div class="card mb-4 mx-7" style="width: 100%">
         <div class="card-body">
           <form method="POST">
-             {% csrf_token %}
-               <div class="form-group">
-              <label for="exampleInputName">Name </label>
-              <input
-                type="text"
-                class="form-control"
-                            name="full_name"
+            {% csrf_token %} {{form.as_p}}
 
-                placeholder="Enter Full Name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Mobile No</label>
-              <input
-                type="text"
-                class="form-control"
-                            name="mobile_no"
-
-                placeholder="Enter Mobile No"
-              />
-            </div>
-                        <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                            name="email"
-
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                            name="password"
-
-                placeholder="Password"
-              />
-            </div>
-                  <div class="form-group">
-              <label for="exampleInputPassword1">Confirm Password</label>
-              <input
-                type="password"
-                class="form-control"
-                            name="confirm_password"
-
-                placeholder=" Confirm Password"
-              />
-            </div>
-         
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -70,5 +18,5 @@
     </div>
   </div>
 
-
-{% endblock content %}
+  {% endblock content %}
+</div>
