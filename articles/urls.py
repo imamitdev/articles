@@ -6,7 +6,6 @@ from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.home, name="home"),
     path("account/", include("accounts.urls")),
-    path("news/", include("article.urls")),
+    path("", include("article.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

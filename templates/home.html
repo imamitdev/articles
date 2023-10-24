@@ -28,80 +28,20 @@
                         <div class="card-body">
                             <div class="small text-muted">{{item.created_at}}</div>
                             <h2 class="card-title">{{ item.title }}</h2>
-                            <p class="card-text">by {{item.author}}</p>
+                            <p class="card-text">by {{item.author.username}}</p>
                             <a class="btn btn-primary" href="{% url 'article_detail' item.id %}">Read more →</a>
                         </div>
                     </div> 
                     {% endfor %}
                     <!-- Nested row for non-featured blog posts-->
-                
-                    <!-- Pagination-->
-                    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        
-                        {% if articles.has_other_pages %}
-                          
-                     
-                          
-                        <ul class="pagination justify-content-center my-4">
-                          {% if articles.has_previous %}
-                            <li class="page-item "><a class="page-link" href="?page={{ articles.previous_page_number }}" >Previous</a></li>
-                            {% else %}
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="/">Previous</a></li>
-                            {% endif %}
-                            {% for i in articles.paginator.page_range %}
-                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                            {% endfor %}
-                            {% if articles.has_next %}
-                            
-                            <li class="page-item"><a class="page-link" href="?page={{ articles.next_page_number }}">Next</a></li>
-                             {% else %}
-                            <li class="page-item active"><a class="page-link" href="#">Next</a></li>
-                              {% endif %}
-                        </ul>
-                           {% endif %}
-                    </nav>
-                </div>
+    
 
-
-
+</div>
 
 
                 <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-header">Search</div>
-                        <div class="card-body">
-                            <form action="{% url 'article_search' %}" method="GET">
-                            <div class="input-group">
-                                <input class="form-control" type="text" name="query" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
-                            </div>
-                                </form>
+ {% include 'includes/search.html' %}
 
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <ul class="list-unstyled mb-0">
-                                         {% for cat in category %}
-                                        <li><a href="{% url 'articles_by_categories' cat.category %}">{{cat.category}}</a></li>
-                                        
-                                          {% endfor %}
-                                    </ul>
-                                </div>
-                             
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                    </div> 
-                </div>
             </div>
         </div>
 

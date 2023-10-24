@@ -16,7 +16,7 @@
 
         {%endif%}
         <div class="card-body">
-          <div class="small text-muted">{{article.created_at|timesince}} ago. | Article Create By: {{article.author.first_name}}</div>
+          <div class="small text-muted">{{article.created_at|timesince}} ago. | Article Create By: {{article.author.username}}</div>
           <h2 class="card-title">{{ article.title }}</h2>
           <p class="card-text">{{article.content}}</p>
           <div class="card-footer d-flex justify-content-between">
@@ -41,6 +41,8 @@
                   <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{liked_count}}
                 </button>
             </p>
+        </div>
+
         </div>
         </div>
       </div>
