@@ -43,7 +43,7 @@ def dashboard(request):
 
 
 @login_required(login_url="login")
-def createarticle(request):
+def create_article(request):
     user = request.user
     if request.method == "POST":
         form = ArticleForm(
