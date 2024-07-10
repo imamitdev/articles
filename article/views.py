@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm
 from django.contrib import messages, auth
-from .models import Article, Category, Like
+from .models import Article, Category, Like, Subscriber
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -54,6 +55,15 @@ def create_article(request):
         if form.is_valid():
             form.instance.author = user
             form.save()
+            subscribers = Subscriber.objects.all()
+            for subscriber in subscribers:
+                send_mail(
+                    "New Blog Post Alert",
+                    f'A new post titled "{form.cleaned_data["title"]}" has been published. Check it out at: example.com/post/{form.instance.id}/',
+                    "imamitsinghchauhan@gmail.com",
+                    [subscriber.email],
+                    fail_silently=True,
+                )
             messages.success(request, "Article Successfully submit.")
             return redirect("dashboard")
         else:

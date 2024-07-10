@@ -1,54 +1,148 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-   <header class="py-5 bg-light border-bottom mb-4">
-            <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to Articlres </h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <div class="row">
-                <!-- Blog entries-->
-                <div class="col-lg-8">
-                    <!-- Featured blog post-->
-                    {% for item in articles %}
-                    <div class="card mb-4">
-                        <a href="{% url 'article_detail' item.id %}">
-                            {%if item.image%}
-                            <img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
+  <main>
+    <!--            
+      - #HERO SECTION
+                -->
 
+    <div class="hero">
+      <div class="container">
+        <div class="left">
+          <h1 class="h1">
+            Hi, I'm <b>Amit&nbsp;Singh</b>.
+            <br />Web Developer
+          </h1>
 
-                            {% else %}
-                            <img class="card-img-top" src="{% static 'img/indexBackground2.jpg' %}" alt="..." /></a>
+          <p class="h3">
+            Specialized in <abbr title="Accessibility">a11y</abbr>
+            and Core Web Vitals
+          </p>
 
-                            {%endif%}
-                        <div class="card-body">
-                            <div class="small text-muted">{{item.created_at}}</div>
-                            <h2 class="card-title">{{ item.title }}</h2>
-                            <p class="card-text">by {{item.author.username}}</p>
-                            <a class="btn btn-primary" href="{% url 'article_detail' item.id %}">Read more →</a>
-                        </div>
-                    </div> 
-                    {% endfor %}
-                    <!-- Nested row for non-featured blog posts-->
-    
-
-</div>
-
-
-                <!-- Side widgets-->
- {% include 'includes/search.html' %}
-
-            </div>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">Contact Me</a>
+            <a href="#" class="btn btn-secondary">About Me</a>
+          </div>
         </div>
 
+        <div class="right">
+          <div class="pattern-bg"></div>
+          <div class="img-box">
+            <img src="{% static '/assets/images/hero.png' %}" alt="Julia Walker" class="hero-img" />
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="main">
+      <div class="container">
+        <!--            
+          - BLOG SECTION
+                    -->
+
+        <div class="blog">
+          <h2 class="h2">Latest Blog Post</h2>
+
+          <div class="blog-card-group">
+            {% for item in articles %}
+              <div class="blog-card">
+                <div class="blog-card-banner">
+                  {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="Building microservices with Dropwizard, MongoDB & Docker" width="250" class="blog-banner-img" />
+                  {% else %}
+                    <img src="{% static 'img/indexBackground2.jpg' %}" alt="Building microservices with Dropwizard, MongoDB & Docker" width="250" class="blog-banner-img" />
+                  {% endif %}
+                </div>
+
+                <div class="blog-content-wrapper">
+                  <button class="blog-topic text-tiny">{{ item.category.category }}</button>
+
+                  <h3><a href="{% url 'article_detail' item.id %}" class="h3">{{ item.title }}</a></h3>
+
+                  <p class="blog-text">{{ item.content }}</p>
+
+                  <div class="wrapper-flex">
+                    <div class="profile-wrapper">
+                      <img src="{% static '/assets/images/author.png' %}" alt="Julia Walker" width="50" />
+                    </div>
+
+                    <div class="wrapper">
+                      <a href="#" class="h4">{{ item.author.username }}</a>
+
+                      <p class="text-sm">
+                        <ion-icon name="time-outline"></ion-icon>
+                        <time datetime="PT3M">{{ item.created_at }}</time>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <button class="btn load-more">Load More</button>
+        </div>
+
+        <!--            
+          - ASIDE
+                    -->
+
+        <div class="aside">
+          <div class="topics">
+            <h2 class="h2">Topics</h2>
+
+            {% for cate in category %}
+              <a href="{% url 'home' %}?q={{ cate.category }}" class="topic-btn">
+                <div class="icon-box">
+                  <ion-icon name="rocket-outline"></ion-icon>
+                </div>
+
+                <p>{{ cate.category }}</p>
+              </a>
+            {% endfor %}
+          </div>
+
+          <div class="contact">
+            <h2 class="h2">Let's Talk</h2>
+
+            <div class="wrapper">
+              <p>Do you want to learn more about how I can help your company overcome problems? Let us have a conversation.</p>
+
+              <ul class="social-link">
+                <li>
+                  <a href="#" class="icon-box discord"><ion-icon name="logo-discord"></ion-icon></a>
+                </li>
+
+                <li>
+                  <a href="#" class="icon-box twitter"><ion-icon name="logo-twitter"></ion-icon></a>
+                </li>
+
+                <li>
+                  <a href="#" class="icon-box facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="newsletter">
+            <h2 class="h2">Newsletter</h2>
+
+            <div class="wrapper">
+              <p>Subscribe to our newsletter to be among the first to keep up with the latest updates.</p>
+
+              <form action="#">
+                <input type="email" name="email" placeholder="Email Address" required />
+
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Side widgets -->
 {% endblock %}
-
-
-
-
-  

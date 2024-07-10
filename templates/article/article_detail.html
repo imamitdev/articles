@@ -1,6 +1,62 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-
 <div class="container">
+  <div class="blog">
+    <h2 class="h2">Blog Post</h2>
+    <div class="wrapper-flex">
+      <div class="profile-wrapper">
+        <img
+          src="{% static '/assets/images/author.png' %}"
+          alt="Julia Walker"
+          width="50"
+        />
+      </div>
+
+      <div class="wrapper">
+        <a href="#" class="h4">Julia Walker</a>
+
+        <p class="text-sm">
+          <time datetime="2022-01-17">Jan 17, 2022</time>
+          <span class="separator"></span>
+          <ion-icon name="time-outline"></ion-icon>
+          <time datetime="PT3M">3 min</time>
+        </p>
+      </div>
+    </div>
+    <div class="blog-card-group">
+      <div class="blog-card1">
+        <div class="blog-card-banner">
+          {%if article.image%}
+          <img
+            src="{{ article.image.url }}"
+            alt="Building microservices with Dropwizard, MongoDB & Docker"
+            width="200"
+            class="blog-banner-img"
+          />
+          {% else %}
+          <img
+            src="{% static 'img/indexBackground2.jpg' %}"
+            alt="Building microservices with Dropwizard, MongoDB & Docker"
+            width="200"
+            class="blog-banner-img"
+          />
+
+          {%endif%}
+        </div>
+
+        <div class="blog-content-wrapper">
+          <button class="blog-topic text-tiny">{{article.category}}</button>
+
+          <h3>
+            <a href="#" class="h3"> {{article.title}} </a>
+          </h3>
+
+          <p class="blog-text">{{article.content}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="container">
   <div class="text-center my-5">
     <h1 class="fw-bolder text-success">{{ article.title }}</h1>
   </div>
@@ -52,6 +108,6 @@
 
 
   </div>
-</div>
+</div> -->
 
 {% endblock content %}
