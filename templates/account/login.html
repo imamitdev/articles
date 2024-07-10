@@ -1,20 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="text-center my-2">
-        <h1 class="text-success">Login</h1>
-      </div>
-      <div class="card mb-4 mx-7">
-        <div class="card-body">
-          <form method="POST">
-            {% csrf_token %} {{form.as_p}}
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    <h2 class="h2 text-success">Login</h2>
+    <div class="form-group">
+      <label for="username" class="form-label">Username</label>
+      {{ form.username }}
     </div>
-  </div>
-
-  {% endblock content %}
+    <div class="form-group">
+      <label for="password" class="form-label">Password</label>
+      {{ form.password }}
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
 </div>
+{% endblock content %}

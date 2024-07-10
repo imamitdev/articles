@@ -1,0 +1,67 @@
+/*-----------------------------------*\ 
+  #FORM STYLE
+\*-----------------------------------*/
+
+.login-form {
+  background: var(--background-primary);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px hsla(0, 0%, 0%, 0.1);
+  max-width: 400px;
+  margin: 3rem auto;
+}
+
+.login-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.login-form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--foreground-primary);
+  font-weight: 600;
+}
+
+.login-form .form-control {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--foreground-tertiary);
+  border-radius: 5px;
+  background: var(--background-secondary);
+  color: var(--foreground-primary);
+}
+
+.login-form .form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.login-form .btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 5px;
+  font-size: var(--fs-4);
+}
+/*-----------------------------------*\
+  #TABLE STYLES
+\*-----------------------------------*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--action-primary);
+}
+
+th {
+  background: var(--background-secondary);
+  color: var(--foreground-primary);
+}
+
+tbody tr:hover {
+  background: var(--action-primary);
+}

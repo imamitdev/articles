@@ -53,7 +53,7 @@
 <header>
   <div class="container">
     <nav class="navbar">
-      <a href="#">
+      <a href="/">
         <img
           src="{% static '/assets/images/logo-light.svg' %}"
           alt="SimpleBlog logo"
@@ -82,15 +82,15 @@
       <div class="flex-wrapper">
         <ul class="desktop-nav">
           <li>
-            <a href="#" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
           </li>
 
           <li>
-            <a href="#" class="nav-link">About Me</a>
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
           </li>
 
           <li>
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{% url 'registration' %}" class="nav-link">Sign Up</a>
           </li>
         </ul>
 
